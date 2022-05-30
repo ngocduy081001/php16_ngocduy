@@ -1,0 +1,1 @@
+<?php echo 'xin chao member, chuc ban mot ngay vui ve';

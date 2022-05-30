@@ -1,0 +1,1 @@
+<?php echo 'xin chao ban da dang nhap tu website ' . $_SERVER['SERVER_NAME'];
