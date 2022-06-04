@@ -17,11 +17,13 @@
         if (empty($data['pass']))
             $error['pass'] = 'Ban chua nhap mat khau';
         else {
-            if ($data['username'] == 'admin' && $data['pass'] == 'admin')
+            if ($data['username'] == 'admin' && $data['pass'] == 'admin') {
                 header("Location: admin.php");
-            elseif ($data['username'] == '123456' && $data['pass'] == '123456')
+                exit();
+            } elseif ($data['username'] == 'member' && $data['pass'] == '123456') {
                 header("Location: member.php");
-            else {
+                exit();
+            } else {
                 echo "<script>alert('tai khoan hoac mat khua khong dung');</script>";
             }
         }
