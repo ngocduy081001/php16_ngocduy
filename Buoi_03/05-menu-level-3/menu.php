@@ -1,11 +1,27 @@
 <?php
 require_once 'data.php';
+
 $xhtmlMenu = '';
 $currentMenu = pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME);
 if (!empty($arrMenu)) {
     foreach ($arrMenu as $keyLevelOne => $menuLevelOne) {
-        $classActive = $arrBreadCrumb[$currentMenu][0]['name'] == $menuLevelOne['name']  ? 'class="active"' : " ";
+        $classActive = ($keyLevelOne == $currentMenu)  ? 'class="active"' : " ";
         if (isset($menuLevelOne['child'])) {
+            if (in_array($currentMenu, array_keys($menuLevelOne['child'])) == true) $classActive = 'class="active"';
+            foreach ($menuLevelOne['child'] as $keyLevelTwo => $menuLevelTwo) {
+                if (isset($menuLevelTwo['child'])) {
+                    if (in_array($currentMenu, array_keys($menuLevelTwo['child'])) == true) $classActive = 'class="active"';
+                }
+            }
+
+            // foreach ($menuLevelOne['child'] as $keyLevelTwo => $menuLevelTwo) {
+            //     if ($keyLevelTwo == $currentMenu) $classActive = 'class="active"';
+            //     if (isset($menuLevelTwo['child'])) {
+            //         foreach ($menuLevelTwo['child'] as $keyLevelTree => $menuLevelTree) {
+            //             if ($keyLevelTree == $currentMenu)  $classActive = 'class="active"';
+            //         }
+            //     }
+            // }
             $xhtmlMenu .= sprintf('<li %s> <a href="%s">%s</a><ul>', $classActive, $menuLevelOne['link'], $menuLevelOne['name']);
             foreach ($menuLevelOne['child'] as $keyLevelTwo => $menuLevelTwo) {
                 if (isset($menuLevelTwo['child'])) {
@@ -23,6 +39,7 @@ if (!empty($arrMenu)) {
         }
     }
 }
+require_once 'breadcrumb.php';
 ?>
 <div class="menuBackground">
     <div class="center">
@@ -34,15 +51,5 @@ if (!empty($arrMenu)) {
 </div>
 
 <div class="breadcrumb">
-    <?php
-    $breadCrumb = "<ul>";
-    foreach ($arrBreadCrumb[$currentMenu] as $keyBreadCrumb => $valuesBreadCrumb) {
-        if (ucfirst($currentMenu) == $valuesBreadCrumb['name'] || $valuesBreadCrumb['link'] == 'index.php') {
-            $breadCrumb .= sprintf('<li>%s</li>', $valuesBreadCrumb['name']);
-        } else
-            $breadCrumb .= sprintf('<li><a href="%s">%s</a></li>', $valuesBreadCrumb['link'], $valuesBreadCrumb['name']) . '>';
-    }
-    $breadCrumb .= '</ul>';
-    echo $breadCrumb;
-    ?>
+    <?= $xhtmlBreadCrumb ?? '' ?>
 </div>

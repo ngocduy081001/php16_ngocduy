@@ -32,6 +32,9 @@
     ]
 ];
 
+
+
+require_once 'data.php';
 $arrBreadCrumb = [];
 foreach ($arrMenu as $keyLevelOne => $menuLevelOne) {
     $arrBreadCrumb[$keyLevelOne][] = ['name' => $menuLevelOne['name'], 'link' => $menuLevelOne['link']];
