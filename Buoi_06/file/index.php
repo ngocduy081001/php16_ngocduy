@@ -34,7 +34,7 @@
 				?>
 					<div class="row <?php echo $class; ?>">
 						<p class="no">
-							<input type="checkbox" name="checkbox[]" value="<?php echo $id; ?>">
+							<input type="checkbox" name="checkbox[]" id="checkked-data" value="<?php echo $id; ?>">
 						</p>
 						<p class="name"><?php echo $tile; ?><span><?php echo $description; ?></span></p>
 						<p><img style="width: 120px ; padding: 20px 0; " src="img/<?= $img ?>"></p>
@@ -65,7 +65,7 @@
 	</div>
 	<script>
 		function confirmAction() {
-			var checkedCount = $('checkbox[]').length;
+			var checkedCount = $('#checkked-data').length;
 			if (checkedCount >= 1) {
 				var confirmAction = confirm("Bạn có đồng ý xoá");
 				if (confirmAction) {
