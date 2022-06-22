@@ -25,7 +25,7 @@
     $data       = array();
 
     // Check file size
-   
+
 
     if (isset($_POST['title']) && isset($_POST['description'])) {
         $data['title']            = $_POST['title'];
@@ -44,7 +44,7 @@
         $flagExtension     = checkExtension($fileUpload['name'], explode('|', $configs['extension']));
 
         if (!$flagSize) {
-            $error['img'] =  'dung luong tap tin khong hop le';
+            $error['' . $configs['img'] . ''] =  'dung luong tap tin khong hop le';
         }
         if (!$flagExtension) {
             $error['img'] = 'phan mo rong khong hop le';
@@ -52,12 +52,12 @@
 
 
         // A-Z, a-z, 0-9: AzG09
-        if (empty($arrayError)) {
+        if (empty($error)) {
             $data['img']    = randomStringFileImg($fileUpload['name'], 7);
 
             $dataFile    = $data['title'] . '||' . $data['description']  . '||' . $data['img'];
             $name = randomString(5);
-            $fileName    = './files/' . $name . '.txt';
+            $fileName    = './' . $configs['file'] . '/' . $name . '.txt';
             move_uploaded_file($fileUpload['tmp_name'], './img/' . $data['img']);
 
             if (file_put_contents($fileName, $dataFile)) {

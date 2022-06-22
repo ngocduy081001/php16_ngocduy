@@ -65,7 +65,7 @@
 	</div>
 	<script>
 		function confirmAction() {
-			var checkedCount = $('#checkked-data').length;
+			var checkedCount = $('input[name="checkbox[]"]:checked').length;
 			if (checkedCount >= 1) {
 				var confirmAction = confirm("Bạn có đồng ý xoá");
 				if (confirmAction) {

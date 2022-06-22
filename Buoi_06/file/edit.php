@@ -12,7 +12,6 @@
 				window.location = 'index.php';
 			});
 		});
-		
 	</script>
 </head>
 
@@ -28,7 +27,7 @@
 	$data['img']				= $content[2];
 
 
-	
+
 	$flag	= false;
 	if (isset($_POST['title']) && isset($_POST['description'])) {
 		$data['title']			= $_POST['title'];
@@ -42,10 +41,9 @@
 		if (checkEmpty($data['description'])) 			$error['description'] = '<p class="error">Dữ liệu không được rỗng</p>';
 		if (checkLength($data['description'], 10, 5000)) $error['description'] .= '<p class="error">Nội dung dài từ 10 đến 5000 ký tự</p>';
 
-
-		if (!empty($_FILES['file-img'])) {
-			$configs    = parse_ini_file('config.ini');
-			$fileUpload = $_FILES['file-img'];
+		$fileUpload = $_FILES['file-img'];
+		$flageChangeImage = false;
+		if (!empty($fileUpload['name'])) {
 			$flagSize         = checkSize($fileUpload['size'], $configs['min_size'], $configs['max_size']);
 			$flagExtension     = checkExtension($fileUpload['name'], explode('|', $configs['extension']));
 			if (!$flagSize) {
@@ -54,17 +52,21 @@
 			if (!$flagExtension) {
 				$error['img'] = 'phan mo rong khong hop le';
 			} else {
-				@unlink("./img/$content[2]");
-				$data['img']    = randomStringFileImg($fileUpload['name'], 7);
-				move_uploaded_file($fileUpload['tmp_name'], './img/' . $data['img']);
+				$flageChangeImage = true;
 			}
 		}
 
 		// A-Z, a-z, 0-9: AzG09
 		if (empty($error)) {
+			if ($flageChangeImage == false) $newImage =  $data['img'];
+			else {
+				$data['img']    = randomStringFileImg($fileUpload['name'], 7);
+			}
 			$dataFile    = $data['title'] . '||' . $data['description']  . '||' . $data['img'];
 			$fileName    = './files/' . $id . '.txt';
 			if (file_put_contents($fileName, $dataFile)) {
+				@unlink("./img/{$data['img']}");
+				move_uploaded_file($fileUpload['tmp_name'], './img/' . $data['img']);
 				$flag            = true;
 			}
 		}
@@ -86,6 +88,7 @@
 					<?php echo $error['description'] ?? "" ?>
 				</div>
 				<input type="file" name="file-img">
+				<?php echo  $error['img'] ?? "" ?>
 				<div class="row">
 					<input type="submit" value="Save" name="submit">
 					<input type="button" value="Cancel" name="cancel" id="cancel-button">

@@ -1,4 +1,5 @@
 <?php
+$configs    = parse_ini_file('config.ini');
 function checkSize($size, $min, $max)
 {
     $flag = false;
