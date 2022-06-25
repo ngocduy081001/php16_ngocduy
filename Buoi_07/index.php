@@ -1,20 +1,25 @@
 <?php
 
-function showAll($path, &$newString, $i = 1)
+function showAll($path, &$newString)
 {
-	$data	= scandir($path);
 
+
+
+	$data	= scandir($path);
 	$newString .= '<ul>';
+
 
 	foreach ($data as $key => $value) {
 
 		if ($value != '.' && $value != '..') {
-			$dir	= $path . '/' . $value;
-			if (is_dir($dir)) {
 
-				$newString .= '<li><img src="./images/icons8-folder-18.png"> ' . $value . '&nbsp&nbsp&nbsp	' . $i;
-				$i++;
-				showAll($dir, $newString, $i);
+			$dir	= $path . '/' . $value;
+
+			if (is_dir($dir)) {
+				$levelDir =  substr_count($path, '/') + 1;
+				$newString .= '<li><img src="./images/icons8-folder-18.png"> ' . $value . '&nbsp&nbsp&nbsp	' . $levelDir;
+
+				showAll($dir, $newString);
 				$newString .= '</li>';
 			} else {
 				switch (pathinfo($value, PATHINFO_EXTENSION)) {
