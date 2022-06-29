@@ -16,8 +16,9 @@
 			session_start();
 			if (@$_SESSION['flagPermission'] == true) {
 				if (isset($_POST['timeout'])) {
-					
-					$_SESSION['timeoutnew'] = $_POST['timeout'];
+					$doc =  simplexml_load_file('./data/timeout.xml');
+					$doc = $_POST['timeout'];
+					$doc->asXML('./data/timeout.xml');
 					header('location: admin.php');
 					exit();
 				} else if ($_SESSION['timeout'] + 20 > time()) {

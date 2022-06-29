@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+$doc =  new DOMDocument();
+$doc->load('./data/timeout.xml');
 echo '<h3>Xin chào: ' . $_SESSION['fullName'] . '</h3>';
 echo '<a href="logout.php">Đăng xuất</a>'; ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,7 +15,7 @@ echo '<a href="logout.php">Đăng xuất</a>'; ?>
 
 <form method="post" action="process.php" name="add-form">
     <p>Time Out</p>
-    <input type="text" name="timeout" value="<?= $_SESSION['timeoutnew'] ?? '' ?>">
+    <input type="text" name="timeout" value="<?= $doc->textContent ?? $_SESSION['timeoutnew']  ?>">
     <input type="submit">
 </form>
 
