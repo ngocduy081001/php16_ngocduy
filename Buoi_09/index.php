@@ -36,14 +36,13 @@ if (!empty($_POST)) {
             //Server settings
             $mail->SMTPDebug = 0;
             $mail->isSMTP();
-
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
             $mail->Username   = $email_json[0]['user'];
             $mail->Password   = $email_json[1]['pass'];
             $mail->SMTPSecure = "tls";
             $mail->Port       = 587;
-            $mail->CharSet = 'UTF-8';
+            $mail->CharSet    = 'UTF-8';
             $mail->setFrom($result['email'], $result['name']);
             $mail->addAddress('ngocduy081001@gmail.com', 'Ngọc Duy');     //Add a recipient
             // $mail->addAddress('ellen@example.com');               //Name is optional
