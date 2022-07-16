@@ -38,7 +38,12 @@
                                 <div class="box mt-4">
                                     <h3 class="mb-1">Giá vàng</h3>
                                     <div class="card card-body" id="box-gold">
-                                        <?php require_once './box-gold.php' ?>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="spinner-border" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                        <!-- <?php require_once './box-gold.php' ?>  -->
 
                                     </div>
 
@@ -46,8 +51,12 @@
                                 <div class="box mt-4">
                                     <h3 class="mb-1">Giá coin</h3>
                                     <div class="card card-body" id="box-coin">
-
-                                        <?php require_once './box-coin.php' ?>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="spinner-border" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                        <!-- <?php require_once './box-coin.php' ?>  -->
                                     </div>
 
                                 </div>
@@ -67,6 +76,10 @@
 	============================================= -->
     <div id="gotoTop" class="icon-angle-up rounded-circle"></div>
     <?php include_once './html/script.php' ?>
+    <script>
+        $('#box-coin').load("./box-coin.php");
+        $('#box-gold').load("./box-gold.php");
+    </script>
 
 </body>
 

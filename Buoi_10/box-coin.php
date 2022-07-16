@@ -1,3 +1,42 @@
+<?php
+$url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
+$parameters = [
+    'start' => '1',
+    'limit' => '10',
+    'convert' => 'USD'
+];
+
+$headers = [
+    'Accepts: application/json',
+    'X-CMC_PRO_API_KEY: 79cc28b2-2223-4bce-8085-c565a52318da'
+];
+$qs = http_build_query($parameters); // query string encode the parameters
+$request = "{$url}?{$qs}"; // create the request URL
+
+
+$curl = curl_init(); // Get cURL resource
+// Set cURL options
+curl_setopt_array($curl, array(
+    CURLOPT_URL => $request,            // set the request URL
+    CURLOPT_HTTPHEADER => $headers,     // set the headers 
+    CURLOPT_RETURNTRANSFER => 1         // ask for raw response instead of bool
+));
+
+$response = curl_exec($curl); // Send the request, save the response
+curl_close($curl);
+$data = json_decode($response, true);
+$xhtmlCoin = '';
+
+foreach ($data['data'] as $item) {
+    $xhtmlCoin .= '<tr>
+    <td>' . $item['name'] . '</td>
+    <td>' . $item['quote']['USD']['price'] . '</td>';
+    $item['quote']['USD']['percent_change_24h'] > 0 ? $xhtmlCoin .= ' <td><span class= "text-success" >' .  number_format($item['quote']['USD']['percent_change_24h'], 2, '.', '')  . '</span></td>
+        </tr>' : $xhtmlCoin .= ' <td><span class="text-danger">' .  number_format($item['quote']['USD']['percent_change_24h'], 2, '.', '')  . '</span></td>
+        </tr>';
+}
+// Close request
+?>
 <table class="table table-sm">
     <thead>
         <tr>
@@ -8,64 +47,6 @@
     </thead>
     <tbody>
 
-        <tr>
-            <td>Bitcoin</td>
-            <td>$36,809.54</td>
-            <td><span class="text-success">2.39%</span></td>
-        </tr>
-
-        <tr>
-            <td>Ethereum</td>
-            <td>$1,327.65</td>
-            <td><span class="text-success">7.21%</span></td>
-        </tr>
-
-        <tr>
-            <td>Tether</td>
-            <td>$1.00</td>
-            <td><span class="text-success">0.07%</span></td>
-        </tr>
-
-        <tr>
-            <td>Polkadot</td>
-            <td>$16.49</td>
-            <td><span class="text-danger">-7.76%</span></td>
-        </tr>
-
-        <tr>
-            <td>XRP</td>
-            <td>$0.29</td>
-            <td><span class="text-success">3.87%</span></td>
-        </tr>
-
-        <tr>
-            <td>Cardano</td>
-            <td>$0.37</td>
-            <td><span class="text-danger">-5.75%</span></td>
-        </tr>
-
-        <tr>
-            <td>Litecoin</td>
-            <td>$156.90</td>
-            <td><span class="text-success">9.28%</span></td>
-        </tr>
-
-        <tr>
-            <td>Bitcoin Cash</td>
-            <td>$520.34</td>
-            <td><span class="text-success">7.58%</span></td>
-        </tr>
-
-        <tr>
-            <td>Chainlink</td>
-            <td>$21.84</td>
-            <td><span class="text-danger">-6.37%</span></td>
-        </tr>
-
-        <tr>
-            <td>Stellar</td>
-            <td>$0.30</td>
-            <td><span class="text-danger">-0.91%</span></td>
-        </tr>
+        <?= $xhtmlCoin  ?>
     </tbody>
 </table>
