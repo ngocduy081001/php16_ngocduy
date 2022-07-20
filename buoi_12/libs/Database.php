@@ -103,8 +103,8 @@ class Database
 	public function update($data, $where)
 	{
 		$newSet 	= $this->createUpdateSQL($data);
-		//$newWhere 	= $this->createWhereUpdateSQL($where);
-		$query = "UPDATE `$this->table` SET " . $newSet . " WHERE id =" . $where . "";
+		$newWhere 	= $this->createWhereUpdateSQL($where);
+		$query = "UPDATE `$this->table` SET " . $newSet . " WHERE " . $newWhere . "";
 		$this->query($query);
 		return $this->affectedRows();
 	}

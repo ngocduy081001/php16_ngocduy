@@ -1,5 +1,5 @@
 <?php
-require_once './libs/Database.php';
+require_once 'libs/Database.php';
 $params		= array(
 	'server' 	=> 'localhost',
 	'username'	=> 'root',

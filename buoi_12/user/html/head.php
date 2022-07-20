@@ -12,8 +12,5 @@
 <link rel="stylesheet" href="css/modern-blog.css" type="text/css" />
 <link rel="stylesheet" href="css/fonts.css" type="text/css" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/mdb.min.css">
-<link rel="stylesheet" href="css/my-style.css">
+<link rel="stylesheet" href="css/custom.css" type="text/css" />
 <title>News | ZendVN</title>
