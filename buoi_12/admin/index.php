@@ -3,6 +3,12 @@ session_start();
 require_once '../connect.php';
 require_once '../libs/HTML.php';
 
+$s = '13149';
+$s[$s[1]] = $s[1] + $s[3];
+print_r($s);
+
+
+
 
 if (!isset($_SESSION['admin'])) {
     header('location: login.php');

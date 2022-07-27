@@ -1,0 +1,51 @@
+
+
+
+
+cau 1
+display: flex;
+  justify-content: center;
+  align-items: center;
+
+cau 2 span_two{
+display:none}
+
+
+cau 3 select u.id, u.email, g.group_name 
+from user as u, group as g
+where u.status = 1 and u.group_id = g.id
+
+cau 4 select id,email,fullname
+from user
+where email like '%@gmail.com%'
+
+ cau 5 select count(id) as total_user , g.group_name , u.group_id
+from group as g , user as u
+group by u.group_id
+
+cau 6 select * from user 
+from user as u, group as g
+order by id desc
+group by g.name = Admin
+
+cau 7 select max(id), fullname email from user
+cau 8 1 2 3 4 5 6 7 8 9 10
+
+cau 9 	public toan cuc
+	private cuc bo
+	protected ke thua truy cap dc
+cau 10 foobar - 10
+cau 11
+cau 12 A
+cau 13 74
+cau 14 E
+cau 15 D
+cau 16 C
+cau 17 jQuery
+cau 18
+cau 19
+cau 20 $values[1][2][0][1]
+cau 21 C
+cau 22. FILEINFO_EXTENSION($fileName)
+
+
