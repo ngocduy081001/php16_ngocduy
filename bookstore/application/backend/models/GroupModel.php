@@ -15,6 +15,7 @@ class GroupModel extends Model
 			$query .= ' WHERE `name` lIKE "%' . $keyWord . '%" order  by id DESC';
 		}
 		$result = $this->listRecord($query);
+
 		return $result;
 	}
 }
