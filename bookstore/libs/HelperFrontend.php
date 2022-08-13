@@ -7,7 +7,7 @@ class HelperFrontend
         $xhtml = '';
         $xhtml = sprintf(' <td class="text-center">
                                 <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox" id="%s" name="%s"
+                                    <input class="custom-control-input multi-checkbox" type="checkbox" id="%s" name="%s"
                                        >
                                     <label for="%s" class="custom-control-label"></label>
                                 </div>

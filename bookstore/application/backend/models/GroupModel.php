@@ -8,12 +8,25 @@ class GroupModel extends Model
 		$this->setTable($this->_table);
 	}
 
-	public function listItems($keyWord = '')
+	public function listItems($keyWord = '', $group_acp, $status)
 	{
-		$query = "SELECT * FROM `$this->_table`";
-		if (!empty($keyWord)) {
-			$query .= ' WHERE `name` lIKE "%' . $keyWord . '%" order  by id DESC';
+		$query[] = "SELECT * FROM `$this->_table`";
+		$query[] = "WHERE";
+		if (!empty($group_acp)) {
+			if ($group_acp == 'no' || $group_acp == 'yes') {
+				$query[] = ' `group_acp` lIKE "%' . $group_acp . '%" and';
+			}
 		}
+		if (!empty($keyWord) || $keyWord == null) {
+			$query[] = ' `name` lIKE "%' . $keyWord . '%"';
+		}
+		if (empty($keyWord && empty($status))) {
+			if ($status == 1 || $status == 0) {
+				$query[] = 'and `status` = ' . $status . ' ';
+			}
+		}
+		$query[] = 'order  by id DESC';
+		$query = implode(' ', $query);
 		$result = $this->listRecord($query);
 
 		return $result;

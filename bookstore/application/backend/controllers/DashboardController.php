@@ -8,11 +8,12 @@ class DashboardController extends Controller
 		$this->_templateObj->setFileTemplate('dashboard.php');
 		$this->_templateObj->setFileConfig('template.ini');
 		$this->_templateObj->load();
+		$this->_view->arrParam = $this->_arrParam;
 	}
 
 	public function indexAction()
 	{
-		@$this->_view->title = $_GET['controller'];
+		$this->_view->title = 'Manage:: List';
 		$this->_view->render('dashboard/index');
 		$this->_view->render('dashboard/index');
 	}

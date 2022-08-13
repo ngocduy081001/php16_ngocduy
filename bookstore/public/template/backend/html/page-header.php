@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark"> <?php echo @$_GET['controller'];
+                <h1 class="m-0 text-dark"> <?php echo $this->title;
                                             ?></h1>
             </div>
         </div>
