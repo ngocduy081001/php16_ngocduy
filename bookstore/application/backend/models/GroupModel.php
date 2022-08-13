@@ -20,11 +20,12 @@ class GroupModel extends Model
 		if (!empty($keyWord) || $keyWord == null) {
 			$query[] = ' `name` lIKE "%' . $keyWord . '%"';
 		}
-		if (empty($keyWord && empty($status))) {
+		if (!empty($status)) {
 			if ($status == 1 || $status == 0) {
 				$query[] = 'and `status` = ' . $status . ' ';
 			}
 		}
+
 		$query[] = 'order  by id DESC';
 		$query = implode(' ', $query);
 		$result = $this->listRecord($query);
