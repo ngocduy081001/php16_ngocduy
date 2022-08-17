@@ -15,7 +15,22 @@ class GroupController extends Controller
 	{
 
 		$this->_view->title = 'Manage:: List';
-		$this->_view->listGroup = $this->_model->listItems(@$this->_arrParam['search_value'], @$this->_arrParam['filter_group_acp'], @$this->_arrParam['status']);
+
+		$this->_view->listGroup 	= $this->_model->listItems(@$this->_arrParam);
+
+		$this->_view->allItems 		= count($this->_model->listItems(
+			@$this->_arrParam,
+			$option[] = ['countStatus' => 'all']
+		));
+
+		$this->_view->inactiveItems = count($this->_model->listItems(
+			@$this->_arrParam,
+			$option[] = ['countStatus' => 'inactive']
+		));
+
+		$this->_view->activeItems 	= $this->_view->allItems - $this->_view->inactiveItems;
+
+		$this->_view->pagination	= new Pagination($this->_view->allItems,$this->_pagination);
 		$this->_view->render('group/index');
 	}
 
@@ -23,11 +38,12 @@ class GroupController extends Controller
 	{
 		if ($this->_arrParam['id']) {
 			$id = $this->_arrParam['id'];
-			$status = ($this->_arrParam['status'] == 1) ? 0 : 1;
+			$status = ($this->_arrParam['status'] == 'active') ? 'inactive' : 'active';
 			$chageStatus = $this->_model->update(['status' => $status], [['id', $id]]);
 			if ($chageStatus > 0) {
 				$_SESSION['notice'] = 'cập nhật dữ liệu thành công';
 			}
+
 			$this->redirect($this->_arrParam['module'], 'group', 'index');
 		}
 	}

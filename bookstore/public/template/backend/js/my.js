@@ -7,19 +7,19 @@ $(document).ready(function () {
   });
   $("#bulk-apply").click(function () {
     var action = $("#bulk-action").val();
-    if (!isNaN(action)) {
-      alert("Hãy chọn chức năng");
-    } else {
+    if (isNaN(action)) {
       var conutValues = 0;
-      $("input[type=checkbox]").each(function () {
-        if (this.checked != true) {
+      $("input[name=checkbox-item]").each(function () {
+        if (this.checked == true) {
           conutValues++;
+          console.log(this.id);
         }
       });
-      console.log(conutValues);
-      if (conutValues != 0) {
-        alert("Hãy chọn ít nhất 1 giá trị");
+      if (conutValues == 0) {
+        alert("Hãy chọn ít nhất 1 bộ dữ liệu");
       }
+    } else {
+      alert("Hãy chọn chức năng");
     }
   });
   $("#check-all").on("click", function () {
@@ -37,8 +37,7 @@ $(document).ready(function () {
   $("#btn-search").click(function (e) {
     var search = $("#search_values").val();
     var regex = new RegExp("^[a-zA-Z]");
-    if (regex.test(search) == false
-    ) {
+    if (regex.test(search) == false) {
       e.preventDefault();
     }
   });

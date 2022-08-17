@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 10, 2022 at 02:06 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th8 17, 2022 lúc 11:27 AM
+-- Phiên bản máy phục vụ: 10.4.24-MariaDB
+-- Phiên bản PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `php_16_duy`
+-- Cơ sở dữ liệu: `php_16_duy`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `book`
+-- Cấu trúc bảng cho bảng `book`
 --
 
 CREATE TABLE `book` (
@@ -45,7 +45,7 @@ CREATE TABLE `book` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `book`
+-- Đang đổ dữ liệu cho bảng `book`
 --
 
 INSERT INTO `book` (`id`, `name`, `description`, `price`, `special`, `sale_off`, `picture`, `created`, `created_by`, `modified`, `modified_by`, `status`, `ordering`, `category_id`) VALUES
@@ -66,7 +66,7 @@ INSERT INTO `book` (`id`, `name`, `description`, `price`, `special`, `sale_off`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cart`
+-- Cấu trúc bảng cho bảng `cart`
 --
 
 CREATE TABLE `cart` (
@@ -82,7 +82,7 @@ CREATE TABLE `cart` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `cart`
+-- Đang đổ dữ liệu cho bảng `cart`
 --
 
 INSERT INTO `cart` (`id`, `username`, `books`, `prices`, `quantities`, `names`, `pictures`, `status`, `date`) VALUES
@@ -94,7 +94,7 @@ INSERT INTO `cart` (`id`, `username`, `books`, `prices`, `quantities`, `names`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Cấu trúc bảng cho bảng `category`
 --
 
 CREATE TABLE `category` (
@@ -110,7 +110,7 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `category`
+-- Đang đổ dữ liệu cho bảng `category`
 --
 
 INSERT INTO `category` (`id`, `name`, `picture`, `created`, `created_by`, `modified`, `modified_by`, `status`, `ordering`) VALUES
@@ -127,13 +127,13 @@ INSERT INTO `category` (`id`, `name`, `picture`, `created`, `created_by`, `modif
 -- --------------------------------------------------------
 
 --
--- Table structure for table `group`
+-- Cấu trúc bảng cho bảng `group`
 --
 
 CREATE TABLE `group` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `group_acp` tinyint(1) DEFAULT 0,
+  `group_acp` varchar(50) DEFAULT '0',
   `created` datetime DEFAULT NULL,
   `created_by` varchar(45) DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
@@ -145,18 +145,24 @@ CREATE TABLE `group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `group`
+-- Đang đổ dữ liệu cho bảng `group`
 --
 
 INSERT INTO `group` (`id`, `name`, `group_acp`, `created`, `created_by`, `modified`, `modified_by`, `status`, `ordering`, `privilege_id`, `picture`) VALUES
-(1, 'Admin', 1, '2013-11-11 00:00:00', 'admin', '2013-11-12 00:00:00', 'admin', '1', 5, '1,2,3,4,5,6,7,8,9,10', ''),
-(2, 'Manager', 1, '2013-11-07 00:00:00', 'admin', '2013-12-03 00:00:00', 'admin', '1', 4, '1,2,3,4,6,7,8,9,10', ''),
-(3, 'Member', 1, '2013-11-12 00:00:00', 'admin', '2013-12-03 00:00:00', 'admin', '1', 2, '', '');
+(1, 'Admin', 'yes', '2013-11-11 00:00:00', 'admin', '2013-11-12 00:00:00', 'admin', 'active', 5, '1,2,3,4,5,6,7,8,9,10', ''),
+(2, 'Manager', 'yes', '2013-11-07 00:00:00', 'admin', '2013-12-03 00:00:00', 'admin', 'active', 4, '1,2,3,4,6,7,8,9,10', ''),
+(3, 'Member', 'yes', '2013-11-12 00:00:00', 'admin', '2013-12-03 00:00:00', 'admin', 'inactive', 2, '', ''),
+(6, 'duy', 'no', NULL, NULL, NULL, NULL, 'active', 10, '', ''),
+(7, 'hj', 'yes', NULL, NULL, NULL, NULL, 'active', 10, '', ''),
+(8, 'lkjlkj', 'yes', NULL, NULL, NULL, NULL, 'active', 10, '', ''),
+(9, 'klkl', 'yes', NULL, NULL, NULL, NULL, 'active', 10, '', ''),
+(10, ';kl;l', 'no', NULL, NULL, NULL, NULL, 'inactive', 10, '', ''),
+(11, 'lghjhgj', 'yes', NULL, NULL, NULL, NULL, 'inactive', 10, '', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `privilege`
+-- Cấu trúc bảng cho bảng `privilege`
 --
 
 CREATE TABLE `privilege` (
@@ -168,7 +174,7 @@ CREATE TABLE `privilege` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `privilege`
+-- Đang đổ dữ liệu cho bảng `privilege`
 --
 
 INSERT INTO `privilege` (`id`, `name`, `module`, `controller`, `action`) VALUES
@@ -186,7 +192,7 @@ INSERT INTO `privilege` (`id`, `name`, `module`, `controller`, `action`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Cấu trúc bảng cho bảng `user`
 --
 
 CREATE TABLE `user` (
@@ -207,7 +213,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `user`
+-- Đang đổ dữ liệu cho bảng `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `fullname`, `password`, `created`, `created_by`, `modified`, `modified_by`, `register_date`, `register_ip`, `status`, `ordering`, `group_id`) VALUES
@@ -223,75 +229,75 @@ INSERT INTO `user` (`id`, `username`, `email`, `fullname`, `password`, `created`
 (10, 'admin01', 'admin01@gmail.com', 'Admin 123', 'e5c0fe73b84c06f43393b87a9c6acaa1', '0000-00-00', NULL, '2013-12-07', 'admin', '2013-12-03 08:12:23', '127.0.0.1', 0, 10, 2);
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `book`
+-- Chỉ mục cho bảng `book`
 --
 ALTER TABLE `book`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `cart`
+-- Chỉ mục cho bảng `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `category`
+-- Chỉ mục cho bảng `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `group`
+-- Chỉ mục cho bảng `group`
 --
 ALTER TABLE `group`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `privilege`
+-- Chỉ mục cho bảng `privilege`
 --
 ALTER TABLE `privilege`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
+-- Chỉ mục cho bảng `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `book`
+-- AUTO_INCREMENT cho bảng `book`
 --
 ALTER TABLE `book`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT for table `category`
+-- AUTO_INCREMENT cho bảng `category`
 --
 ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `group`
+-- AUTO_INCREMENT cho bảng `group`
 --
 ALTER TABLE `group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `privilege`
+-- AUTO_INCREMENT cho bảng `privilege`
 --
 ALTER TABLE `privilege`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;

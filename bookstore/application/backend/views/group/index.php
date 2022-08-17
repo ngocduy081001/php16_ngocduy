@@ -2,14 +2,18 @@
 
 $xhtml = '';
 $data = $this->listGroup;
+$countALlItems = $this->allItems;
+$countActive = $this->activeItems;
+$countInactive = $this->inactiveItems;
+echo '<pre style="color: red;">';
+print_r($this->pagination);
+echo '</pre>';
+
 if (!empty($data)) {
+
     $xhtml = '';
-    $countActive = 0;
-    $countInactive = 0;
     foreach ($data as $key => $value) {
-        if ($value['status'] == 1) {
-            $countActive++;
-        } else $countInactive++;
+
         $xhtml .= ' <tr>
         ' . HelperFrontend::checkbox($value['id']) . '
        ' . HelperFrontend::text($value['id']) . '
@@ -19,8 +23,8 @@ if (!empty($data)) {
         
         <td class="text-center position-relative"> ' . Helpers::itemGroup($value['group_acp'], $value['id'], $_GET['controller']) . '</td>
 
-        ' . HelperFrontend::textFontAwesome('far fa-user', 'far fa-clock', $value['created']) . '
-        ' . HelperFrontend::textFontAwesome('far fa-user', 'far fa-clock', $value['modified']) . '
+        ' . HelperFrontend::textFontAwesome('far fa-user',$value['name'], 'far fa-clock', $value['created']) . '
+        ' . HelperFrontend::textFontAwesome('far fa-user',$value['name'], 'far fa-clock', $value['modified']) . '
         
         <td class="text-center">
         ' . HelperFrontend::buttonAction('edit', $this->arrParam['module'], $this->arrParam['controller'], $value['id']) . '

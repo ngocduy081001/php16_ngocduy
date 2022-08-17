@@ -8,28 +8,34 @@ class GroupModel extends Model
 		$this->setTable($this->_table);
 	}
 
-	public function listItems($keyWord = '', $group_acp, $status)
+	public function listItems($arrParam, $options = null)
 	{
-		$query[] = "SELECT * FROM `$this->_table`";
-		$query[] = "WHERE";
-		if (!empty($group_acp)) {
-			if ($group_acp == 'no' || $group_acp == 'yes') {
-				$query[] = ' `group_acp` lIKE "%' . $group_acp . '%" and';
-			}
-		}
-		if (!empty($keyWord) || $keyWord == null) {
-			$query[] = ' `name` lIKE "%' . $keyWord . '%"';
-		}
-		if (!empty($status)) {
-			if ($status == 1 || $status == 0) {
-				$query[] = 'and `status` = ' . $status . ' ';
-			}
-		}
 
+		$flasCountStatus = false;
+		$query[] = "SELECT * FROM `$this->_table`";
+		$query[] = "WHERE `id` > 0";
+		if (isset($arrParam['filter_group_acp'])) {
+			if ($arrParam['filter_group_acp'] == 'no' || $arrParam['filter_group_acp'] == 'yes') {
+				$query[] = 'and `group_acp` lIKE "%' . $arrParam['filter_group_acp'] . '%" ';
+			}
+		}
+		if (isset($arrParam['search_value'])) {
+			$query[] = 'and `name` lIKE "%' . $arrParam['search_value'] . '%"';
+		}
+		if (isset($options['countStatus'])) {
+			if ($options['countStatus'] != 'all') {
+				$query[] = 'and `status` like "%' . $options['countStatus'] . '%" ';
+			}
+			$flasCountStatus = true;
+		}
+		if ($flasCountStatus == false) {
+			if (isset($arrParam['status'])) {
+				$query[] = 'and `status` like "%' . $arrParam['status'] . '%" ';
+			}
+		}
 		$query[] = 'order  by id DESC';
 		$query = implode(' ', $query);
 		$result = $this->listRecord($query);
-
 		return $result;
 	}
 }

@@ -1,3 +1,9 @@
+<?php
+    $groupACP=@$this->arrParam['filter_group_acp'];;
+    $search= @$this->arrParam['search_value'];
+
+
+?>
 <div class="card card-info card-outline">
     <div class="card-header">
         <h6 class="card-title">Search & Filter</h6>
@@ -9,16 +15,20 @@
     <div class="card-body">
         <div class="row justify-content-between">
             <div class="mb-1">
-                <a href="index.php?module=backend&controller=group&action=index" class="mr-1 btn btn-sm btn-info">All <span class="badge badge-pill badge-light"><?= count($data) ?> </span></a>
-                <a name="search_status" href="index.php?module=backend&controller=group&action=index&status=1<?php 
-                if(!empty(@$this->arrParam['filter_group_acp'])) echo 
-                '&filter_group_acp='.@$this->arrParam['filter_group_acp'] ;
-                if(!empty(@$this->arrParam['search_value'])) echo  '&search_value='.@$this->arrParam['search_value'] 
+                <a href="index.php?module=backend&controller=group&action=index<?php 
+                if(!empty($groupACP)) echo 
+                '&filter_group_acp='.$groupACP ;
+                if(!empty($search)) echo  '&search_value='.$search 
+                ?>" class="mr-1 btn btn-sm btn-info">All <span class="badge badge-pill badge-light"><?= $countALlItems ?> </span></a>
+                <a name="search_status" href="index.php?module=backend&controller=group&action=index&status=active<?php 
+                if(!empty($groupACP)) echo 
+                '&filter_group_acp='.$groupACP ;
+                if(!empty($search)) echo  '&search_value='.$search 
                 ?>" class="mr-1 btn btn-sm btn-secondary">Active <span class="badge badge-pill badge-light"><?= $countActive ?? 0  ?></span></a>
-                <a name="search_status" href="index.php?module=backend&controller=group&action=index&status=0<?php 
-                if(!empty(@$this->arrParam['filter_group_acp'])) echo 
-                '&filter_group_acp='.@$this->arrParam['filter_group_acp'] ;
-                if(!empty(@$this->arrParam['search_value'])) echo  '&search_value='.@$this->arrParam['search_value'] 
+                <a name="search_status" href="index.php?module=backend&controller=group&action=index&status=inactive<?php 
+                if(!empty($groupACP)) echo 
+                '&filter_group_acp='.$groupACP ;
+                if(!empty($search)) echo  '&search_value='.$search 
                 ?>" class="mr-1 btn btn-sm btn-secondary">Inactive <span class="badge badge-pill badge-light"><?= $countInactive ?? 0  ?></span></a>
             </div>
             <div class="mb-1">

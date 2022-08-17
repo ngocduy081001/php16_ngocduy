@@ -5,7 +5,7 @@ class Helpers
     public static function itemStatus($status, $item, $controller)
     {
         $xhtml = '';
-        if ($status == '1') {
+        if ($status == 'active') {
             $class = 'btn-success rounded-circle';
             $icon = 'fa fa-check';
         } else {
@@ -20,7 +20,7 @@ class Helpers
     public static function itemGroup($group, $item, $controller)
     {
         $xhtml = '';
-        if ($group == '1') {
+        if ($group == 'yes') {
             $class = 'btn-success rounded-circle';
             $icon = 'fa fa-check';
         } else {
