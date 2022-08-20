@@ -1,14 +1,12 @@
 <?php
-
+echo '<pre style="color: red;">';
+print_r($this->pagination);
+echo '</pre>';
 $xhtml = '';
 $data = $this->listGroup;
 $countALlItems = $this->allItems;
 $countActive = $this->activeItems;
 $countInactive = $this->inactiveItems;
-echo '<pre style="color: red;">';
-print_r($this->pagination);
-echo '</pre>';
-
 if (!empty($data)) {
 
     $xhtml = '';
@@ -23,8 +21,8 @@ if (!empty($data)) {
         
         <td class="text-center position-relative"> ' . Helpers::itemGroup($value['group_acp'], $value['id'], $_GET['controller']) . '</td>
 
-        ' . HelperFrontend::textFontAwesome('far fa-user',$value['name'], 'far fa-clock', $value['created']) . '
-        ' . HelperFrontend::textFontAwesome('far fa-user',$value['name'], 'far fa-clock', $value['modified']) . '
+        ' . HelperFrontend::textFontAwesome('far fa-user', $value['name'], 'far fa-clock', $value['created']) . '
+        ' . HelperFrontend::textFontAwesome('far fa-user', $value['name'], 'far fa-clock', $value['modified']) . '
         
         <td class="text-center">
         ' . HelperFrontend::buttonAction('edit', $this->arrParam['module'], $this->arrParam['controller'], $value['id']) . '
@@ -34,24 +32,26 @@ if (!empty($data)) {
     </tr>';
     }
 }
+
+echo HelperFrontend::alerNotice('Change status', Notice_Change_Status);
 ?>
-<section class="content">
-    <div class="container-fluid">
-        <!-- Search & Filter -->
-        <?php require_once 'element/search_filter.php' ?>
 
-        <!-- List -->
-        <div class="card card-info card-outline">
-            <?php require_once 'element/content_header.php' ?>
-            <div class="card-body">
-                <!-- Control -->
-                <?php require_once 'element/select_box.php' ?>
+<!-- Search & Filter -->
 
-                <!-- List Content -->
-                <?php require_once 'element/list_content.php' ?>
-            </div>
-            <!-- pagination -->
-            <?php require_once 'element/pagination.php' ?>
-        </div>
+<?php require_once 'element/search_filter.php' ?>
+
+<!-- List -->
+<div class="card card-info card-outline">
+    <?php require_once 'element/content_header.php' ?>
+    <div class="card-body">
+
+        <!-- Control -->
+        <?php require_once 'element/select_box.php' ?>
+
+        <!-- List Content -->
+        <?php require_once 'element/list_content.php' ?>
     </div>
-</section>
+    <!-- pagination -->
+    <?php require_once 'element/pagination.php' ?>
+</div>
+</div>

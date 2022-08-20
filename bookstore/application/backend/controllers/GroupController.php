@@ -30,7 +30,7 @@ class GroupController extends Controller
 
 		$this->_view->activeItems 	= $this->_view->allItems - $this->_view->inactiveItems;
 
-		$this->_view->pagination	= new Pagination($this->_view->allItems,$this->_pagination);
+		$this->_view->pagination	= new Pagination($this->_view->allItems, $this->_pagination);
 		$this->_view->render('group/index');
 	}
 
@@ -39,11 +39,10 @@ class GroupController extends Controller
 		if ($this->_arrParam['id']) {
 			$id = $this->_arrParam['id'];
 			$status = ($this->_arrParam['status'] == 'active') ? 'inactive' : 'active';
-			$chageStatus = $this->_model->update(['status' => $status], [['id', $id]]);
-			if ($chageStatus > 0) {
-				$_SESSION['notice'] = 'cập nhật dữ liệu thành công';
+			$this->_model->update(['status' => $status], [['id', $id]]);
+			if ($this->_model->affectedRows()) {
+				Session::set('message', Notice_Change_Status);
 			}
-
 			$this->redirect($this->_arrParam['module'], 'group', 'index');
 		}
 	}

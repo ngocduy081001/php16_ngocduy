@@ -21,19 +21,22 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <?php require_once 'html/page-header.php'; ?>
-            <?php
-            require_once APPLICATION_PATH . $this->_moduleName . DS . 'views' . DS . $this->_fileView . '.php';
-            ?>
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Content Header (Page header) -->
+                    <?php require_once 'html/page-header.php'; ?>
+                    <?php
+                    require_once APPLICATION_PATH . $this->_moduleName . DS . 'views' . DS . $this->_fileView . '.php';
+                    ?>
 
-            <!-- script -->
+                    <!-- script -->
+                </div>
+                <!-- /.content-wrapper -->
+                <?php require_once 'html/footer.php'; ?>
+            </section>
         </div>
-        <!-- /.content-wrapper -->
-        <?php require_once 'html/footer.php'; ?>
-    </div>
-    <!-- <?php require_once 'html/script.php'; ?> -->
-    <?php echo $this->_jsFiles; ?>
+        <!-- <?php require_once 'html/script.php'; ?> -->
+        <?php echo $this->_jsFiles; ?>
 </body>
 
 </html>

@@ -24,18 +24,27 @@ class GroupModel extends Model
 		}
 		if (isset($options['countStatus'])) {
 			if ($options['countStatus'] != 'all') {
-				$query[] = 'and `status` like "%' . $options['countStatus'] . '%" ';
+				$query[] = 'and `status` ="' . $options['countStatus'] . '" ';
 			}
 			$flasCountStatus = true;
 		}
 		if ($flasCountStatus == false) {
 			if (isset($arrParam['status'])) {
-				$query[] = 'and `status` like "%' . $arrParam['status'] . '%" ';
+				$query[] = 'and `status` ="' . $arrParam['status'] . '" ';
 			}
 		}
-		$query[] = 'order  by id DESC';
+		$pagination			= $arrParam['pagination'];
+		$totalItemsPerPage	= $pagination['totalItemsPerPage'];
+		if ($totalItemsPerPage > 0) {
+			$position	= ($pagination['currentPage'] - 1) * $totalItemsPerPage;
+			$query[]	= "LIMIT $position, $totalItemsPerPage";
+		}
 		$query = implode(' ', $query);
 		$result = $this->listRecord($query);
+
+
+
+
 		return $result;
 	}
 }

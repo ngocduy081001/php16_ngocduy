@@ -12,7 +12,6 @@ $(document).ready(function () {
       $("input[name=checkbox-item]").each(function () {
         if (this.checked == true) {
           conutValues++;
-          console.log(this.id);
         }
       });
       if (conutValues == 0) {
