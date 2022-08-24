@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 17, 2022 lúc 11:27 AM
--- Phiên bản máy phục vụ: 10.4.24-MariaDB
--- Phiên bản PHP: 7.4.29
+-- Host: 127.0.0.1
+-- Generation Time: Aug 24, 2022 at 07:34 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `php_16_duy`
+-- Database: `php_16_duy`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `book`
+-- Table structure for table `book`
 --
 
 CREATE TABLE `book` (
@@ -45,7 +45,7 @@ CREATE TABLE `book` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `book`
+-- Dumping data for table `book`
 --
 
 INSERT INTO `book` (`id`, `name`, `description`, `price`, `special`, `sale_off`, `picture`, `created`, `created_by`, `modified`, `modified_by`, `status`, `ordering`, `category_id`) VALUES
@@ -66,7 +66,7 @@ INSERT INTO `book` (`id`, `name`, `description`, `price`, `special`, `sale_off`,
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `cart`
+-- Table structure for table `cart`
 --
 
 CREATE TABLE `cart` (
@@ -82,7 +82,7 @@ CREATE TABLE `cart` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `cart`
+-- Dumping data for table `cart`
 --
 
 INSERT INTO `cart` (`id`, `username`, `books`, `prices`, `quantities`, `names`, `pictures`, `status`, `date`) VALUES
@@ -94,7 +94,7 @@ INSERT INTO `cart` (`id`, `username`, `books`, `prices`, `quantities`, `names`, 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `category`
+-- Table structure for table `category`
 --
 
 CREATE TABLE `category` (
@@ -110,7 +110,7 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `category`
+-- Dumping data for table `category`
 --
 
 INSERT INTO `category` (`id`, `name`, `picture`, `created`, `created_by`, `modified`, `modified_by`, `status`, `ordering`) VALUES
@@ -127,7 +127,7 @@ INSERT INTO `category` (`id`, `name`, `picture`, `created`, `created_by`, `modif
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `group`
+-- Table structure for table `group`
 --
 
 CREATE TABLE `group` (
@@ -145,24 +145,20 @@ CREATE TABLE `group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `group`
+-- Dumping data for table `group`
 --
 
 INSERT INTO `group` (`id`, `name`, `group_acp`, `created`, `created_by`, `modified`, `modified_by`, `status`, `ordering`, `privilege_id`, `picture`) VALUES
-(1, 'Admin', 'yes', '2013-11-11 00:00:00', 'admin', '2013-11-12 00:00:00', 'admin', 'active', 5, '1,2,3,4,5,6,7,8,9,10', ''),
-(2, 'Manager', 'yes', '2013-11-07 00:00:00', 'admin', '2013-12-03 00:00:00', 'admin', 'active', 4, '1,2,3,4,6,7,8,9,10', ''),
+(1, 'Admin', 'no', '2013-11-11 00:00:00', 'admin', '2022-08-22 14:42:25', 'dev', 'inactive', 5, '1,2,3,4,5,6,7,8,9,10', ''),
+(2, 'Manager', 'yes', '2013-11-07 00:00:00', 'admin', '2013-12-03 00:00:00', 'admin', 'inactive', 4, '1,2,3,4,6,7,8,9,10', ''),
 (3, 'Member', 'yes', '2013-11-12 00:00:00', 'admin', '2013-12-03 00:00:00', 'admin', 'inactive', 2, '', ''),
-(6, 'duy', 'no', NULL, NULL, NULL, NULL, 'active', 10, '', ''),
-(7, 'hj', 'yes', NULL, NULL, NULL, NULL, 'active', 10, '', ''),
-(8, 'lkjlkj', 'yes', NULL, NULL, NULL, NULL, 'active', 10, '', ''),
-(9, 'klkl', 'yes', NULL, NULL, NULL, NULL, 'active', 10, '', ''),
-(10, ';kl;l', 'no', NULL, NULL, NULL, NULL, 'inactive', 10, '', ''),
-(11, 'lghjhgj', 'yes', NULL, NULL, NULL, NULL, 'inactive', 10, '', '');
+(13, 'psd', 'no', '2022-08-22 13:54:28', 'dev', NULL, NULL, 'inactive', 10, '', ''),
+(15, 'psd', 'no', '2022-08-23 08:29:24', 'dev', NULL, NULL, 'inactive', 10, '', '');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `privilege`
+-- Table structure for table `privilege`
 --
 
 CREATE TABLE `privilege` (
@@ -174,7 +170,7 @@ CREATE TABLE `privilege` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `privilege`
+-- Dumping data for table `privilege`
 --
 
 INSERT INTO `privilege` (`id`, `name`, `module`, `controller`, `action`) VALUES
@@ -192,7 +188,7 @@ INSERT INTO `privilege` (`id`, `name`, `module`, `controller`, `action`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -201,106 +197,101 @@ CREATE TABLE `user` (
   `email` varchar(255) NOT NULL,
   `fullname` varchar(255) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
-  `created` date DEFAULT '0000-00-00',
+  `status` varchar(50) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  `register_at` datetime NOT NULL,
   `created_by` varchar(45) DEFAULT NULL,
-  `modified` date DEFAULT '0000-00-00',
   `modified_by` varchar(45) DEFAULT NULL,
-  `register_date` datetime DEFAULT '0000-00-00 00:00:00',
   `register_ip` varchar(25) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT 0,
   `ordering` int(11) DEFAULT 10,
   `group_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `user`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `email`, `fullname`, `password`, `created`, `created_by`, `modified`, `modified_by`, `register_date`, `register_ip`, `status`, `ordering`, `group_id`) VALUES
-(1, 'nvan', 'nvan@gmail.com', 'Nguyễn Văn An', 'e10adc3949ba59abbe56e057f20f883e', '0000-00-00', '1', '0000-00-00', NULL, '0000-00-00 00:00:00', NULL, 1, 4, 1),
-(2, 'nvb', 'nvb@gmail.com', 'Nguyễn Văn B', 'e10adc3949ba59abbe56e057f20f883e', '0000-00-00', '1', '0000-00-00', NULL, '0000-00-00 00:00:00', NULL, 1, 3, 2),
-(3, 'nvc', 'nvc@gmail.com', 'Nguyễn Văn C', 'e10adc3949ba59abbe56e057f20f883e', '0000-00-00', '1', '0000-00-00', NULL, '0000-00-00 00:00:00', NULL, 1, 2, 3),
-(4, 'admin', 'admin@gmail.com', 'Admin', 'e10adc3949ba59abbe56e057f20f883e', '0000-00-00', '1', '0000-00-00', NULL, '0000-00-00 00:00:00', NULL, 1, 1, 2),
-(5, 'nguyenvana1', 'lthlan54@gmail.com', 'Admin 3', '3b269d99b6c31f1467421bbcfdec7908', '0000-00-00', NULL, '0000-00-00', NULL, '2013-11-19 18:11:45', '127.0.0.1', 0, 10, 0),
-(6, 'nguyenvana2', 'lthlan55@gmail.com', 'Admin 3', '3b269d99b6c31f1467421bbcfdec7908', '0000-00-00', NULL, '0000-00-00', NULL, '2013-11-19 18:11:09', '127.0.0.1', 0, 10, 0),
-(7, 'nguyenvana4', 'lthlan56@gmail.com', '', '3b269d99b6c31f1467421bbcfdec7908', '0000-00-00', NULL, '0000-00-00', NULL, '2013-11-19 18:11:08', '127.0.0.1', 0, 10, 0),
-(8, 'nguyenvana12', 'lthlan541@gmail.com', 'Admin 3', '3b269d99b6c31f1467421bbcfdec7908', '0000-00-00', NULL, '2013-12-02', '4', '2013-11-19 18:11:06', '127.0.0.1', 1, 12, 1),
-(9, 'nguyenvana122', 'lthlan5412@gmail.com', '', '3b269d99b6c31f1467421bbcfdec7908', '2013-12-02', '4', '2013-12-02', '4', '0000-00-00 00:00:00', NULL, 0, 1, 3),
-(10, 'admin01', 'admin01@gmail.com', 'Admin 123', 'e5c0fe73b84c06f43393b87a9c6acaa1', '0000-00-00', NULL, '2013-12-07', 'admin', '2013-12-03 08:12:23', '127.0.0.1', 0, 10, 2);
+INSERT INTO `user` (`id`, `username`, `email`, `fullname`, `password`, `status`, `created`, `modified`, `register_at`, `created_by`, `modified_by`, `register_ip`, `ordering`, `group_id`) VALUES
+(11, 'ngocduy', 'ngocduy@gmail.com', 'Phạm Trần Ngọc Duy', '123456', 'inactive', '2022-08-23 11:08:05', '2022-08-23 11:08:05', '2022-08-23 11:08:05', 'admin', NULL, NULL, 10, 1),
+(12, 'ngocduy', 'ngocduy@gmail.com', 'Phạm Trần Ngọc Duy', '123456', 'inactive', '2022-08-23 11:08:05', '2022-08-23 11:08:05', '2022-08-23 11:08:05', 'admin', NULL, NULL, 10, 1),
+(13, 'ngocduy', 'ngocduy@gmail.com', 'ngocduy', 'ngocduy', 'active', '2022-08-23 19:45:31', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'dev', NULL, NULL, 10, 1),
+(14, 'ngocduy', 'ngocduy@gmail.com', 'ngocduy', 'ngocduy', 'active', '2022-08-23 19:45:31', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'dev', NULL, NULL, 10, 1),
+(15, 'ngocduy', 'ngocduy@gmail.com', 'ngocduy', 'ngocduy', 'active', '2022-08-23 19:46:29', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'dev', NULL, NULL, 10, 3);
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `book`
+-- Indexes for table `book`
 --
 ALTER TABLE `book`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `cart`
+-- Indexes for table `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `category`
+-- Indexes for table `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `group`
+-- Indexes for table `group`
 --
 ALTER TABLE `group`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `privilege`
+-- Indexes for table `privilege`
 --
 ALTER TABLE `privilege`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `book`
+-- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT cho bảng `category`
+-- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT cho bảng `group`
+-- AUTO_INCREMENT for table `group`
 --
 ALTER TABLE `group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT cho bảng `privilege`
+-- AUTO_INCREMENT for table `privilege`
 --
 ALTER TABLE `privilege`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT cho bảng `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
