@@ -19,17 +19,17 @@
                 if(!empty($groupACP)) echo 
                 '&filter_group_acp='.$groupACP ;
                 if(!empty($search)) echo  '&search_value='.$search 
-                ?>" class="mr-1 btn btn-sm btn-info">All <span class="badge badge-pill badge-light"><?= $countALlItems ?> </span></a>
+                ?>" class="mr-1 btn btn-sm btn-info">All <span class="badge badge-pill badge-light"><?php echo $this->totalItems['all']?></span></a>
                 <a name="search_status" href="index.php?module=backend&controller=group&action=index&status=active<?php 
                 if(!empty($groupACP)) echo 
                 '&filter_group_acp='.$groupACP ;
                 if(!empty($search)) echo  '&search_value='.$search 
-                ?>" class="mr-1 btn btn-sm btn-secondary">Active <span class="badge badge-pill badge-light"><?= $countActive ?? 0  ?></span></a>
+                ?>" class="mr-1 btn btn-sm btn-secondary">Active <span class="badge badge-pill badge-light"><?php echo $this->totalItems['active']?? 0 ?> </span></a>
                 <a name="search_status" href="index.php?module=backend&controller=group&action=index&status=inactive<?php 
                 if(!empty($groupACP)) echo 
                 '&filter_group_acp='.$groupACP ;
                 if(!empty($search)) echo  '&search_value='.$search 
-                ?>" class="mr-1 btn btn-sm btn-secondary">Inactive <span class="badge badge-pill badge-light"><?= $countInactive ?? 0  ?></span></a>
+                ?>" class="mr-1 btn btn-sm btn-secondary">Inactive <span class="badge badge-pill badge-light"><?php echo $this->totalItems['inactive']?? 0 ?></span></a>
             </div>
             <div class="mb-1">
                 <form id="filter_group_acp" method="get">

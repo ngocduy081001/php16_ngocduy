@@ -1,7 +1,9 @@
 <?php
-
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+error_reporting(E_ALL & ~E_NOTICE);
 require_once 'define.php';
 require_once 'define-notice.php';
+
 function __autoload($clasName)
 {
 	require_once LIBRARY_PATH . "{$clasName}.php";

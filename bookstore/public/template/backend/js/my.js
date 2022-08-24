@@ -6,31 +6,24 @@ $(document).ready(function () {
     $("#search_values").val("");
   });
   $("#bulk-apply").click(function () {
-    var action = $("#bulk-action").val();
-    if (isNaN(action)) {
-      var conutValues = 0;
-      $("input[name=checkbox-item]").each(function () {
-        if (this.checked == true) {
-          conutValues++;
-        }
-      });
-      if (conutValues == 0) {
-        alert("Hãy chọn ít nhất 1 bộ dữ liệu");
+    let url = $(this).data("url");
+    let slbValue = $("#bulk-action").val();
+    if (slbValue != "default") {
+      ckbLength = $('input[name="ckid[]"]:checked').length;
+      if (ckbLength > 0) {
+        url = url.replace("value_new", slbValue);
+        $("#form-table").attr("action", url);
+        $("#form-table").submit();
+      } else {
+        alert("Vui long chon it nhat 1 checkbox");
       }
     } else {
-      alert("Hãy chọn chức năng");
+      alert("Vui long chon action");
     }
   });
-  $("#check-all").on("click", function () {
-    if (this.checked) {
-      $("input[type=checkbox]").each(function () {
-        this.checked = true;
-      });
-    } else {
-      $("input[type=checkbox]").each(function () {
-        this.checked = false;
-      });
-    }
+  // Check all, Uncheck all
+  $("#check-all").change(function () {
+    $("input:checkbox").prop("checked", $(this).prop("checked"));
   });
 
   $("#btn-search").click(function (e) {
@@ -39,5 +32,17 @@ $(document).ready(function () {
     if (regex.test(search) == false) {
       e.preventDefault();
     }
+  });
+  $("select[name='select-group']").change(function () {
+    var group = $(this).val();
+    var id = $(this).data("id");
+    $.ajax({
+      type: "POST",
+      url: "index.php?module=backend&controller=user&action=changeGroup",
+      data: { group: group, id: id, message: "message" },
+      success: function (data) {
+        //sessionStorage.setItem("message", "message");
+      },
+    });
   });
 });

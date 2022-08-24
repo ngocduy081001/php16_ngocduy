@@ -71,6 +71,10 @@ class Model
 				$this->query($query);
 			}
 		}
+		echo '<pre style="color: red;">';
+		print_r($query);
+		echo '</pre>';
+		die();
 		return $this->lastID();
 	}
 
@@ -150,8 +154,9 @@ class Model
 	// DELETE
 	public function delete($where)
 	{
+
 		$newWhere 	= $this->createWhereDeleteSQL($where);
-		$query 		= "DELETE FROM `$this->table` WHERE `id` IN ($newWhere)";
+		$query 		= "DELETE FROM `$this->_table` WHERE `id` IN ($newWhere)";
 		$this->query($query);
 		return $this->affectedRows();
 	}
@@ -172,8 +177,9 @@ class Model
 	// LIST RECORD
 	public function listRecord($query)
 	{
-		$result = array();
+		$result = [];
 		if (!empty($query)) {
+
 			$resultQuery = $this->query($query);
 			if (mysqli_num_rows($resultQuery) > 0) {
 				while ($row = mysqli_fetch_assoc($resultQuery)) {

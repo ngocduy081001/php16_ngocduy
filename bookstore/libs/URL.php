@@ -1,24 +1,19 @@
 <?php
 class URL
 {
-	
-
+	public static function redirect($link)
+	{
+		header('location:' . $link);
+	}
 	public static function createLink($module, $controller, $action, $params = null)
 	{
-		$linkParams = '';
+
+		$queryParams = '';
 		if (!empty($params)) {
 			foreach ($params as $key => $value) {
-				$linkParams .= "&$key=$value";
+				$queryParams .= "&$key=$value";
 			}
 		}
-
-		$url = 'index.php?module=' . $module . '&controller=' . $controller . '&action=' . $action . $linkParams;
-		return $url;
-	}
-
-	public function redirect($moduleName, $controller = 'index', $action = 'index')
-	{
-		header("location: index.php?module=$moduleName&controller=$controller&action=$action");
-		exit();
+		return sprintf('index.php?module=%s&controller=%s&action=%s%s', $module, $controller, $action, $queryParams);
 	}
 }

@@ -1,13 +1,21 @@
 <?php
-class GroupModel extends Model
+class UserModel extends Model
 {
-	protected $_table = TBL_GROUP;
+	protected $_tableUser = TBL_USER;
+	protected $_tableGroup = TBL_GROUP;
+	protected $_db = DB_NAME;
 	public function __construct()
 	{
 		parent::__construct();
-		$this->setTable($this->_table);
+		$this->setTable($this->_tableUser);
 	}
+	public function listItemsGroup()
+	{
 
+		$query = "SELECT `id` ,`name` FROM `$this->_tableGroup` where `status` = 'active' GROUP by `name`";
+		$result = $this->listRecord($query);
+		return $result;
+	}
 	public function countItem($arrParam, $option = null)
 	{
 
@@ -28,9 +36,9 @@ class GroupModel extends Model
 	public function listItems($arrParam, $options = null)
 	{
 
-		$query[] = "SELECT `id`, `name`, `group_acp`, `created`, `created_by`, `modified`, `modified_by`, `status`, `ordering`";
-		$query[] = "FROM `$this->_table`";
-		$query[] = "WHERE `id` > 0";
+		$query[] = "SELECT $this->_tableUser.id, $this->_tableUser.username, $this->_tableUser.fullname,$this->_tableUser.email,$this->_tableUser.status, $this->_tableUser.created, $this->_db.$this->_tableGroup.name";
+		$query[] = "FROM $this->_tableUser, $this->_db.$this->_tableGroup";
+		$query[] = "WHERE $this->_tableUser.group_id = $this->_tableGroup.id";
 		if (isset($arrParam['filter_group_acp'])) {
 			if ($arrParam['filter_group_acp'] == 'no' || $arrParam['filter_group_acp'] == 'yes') {
 				$query[] = 'AND `group_acp` lIKE "%' . $arrParam['filter_group_acp'] . '%" ';
@@ -49,16 +57,17 @@ class GroupModel extends Model
 			$query[]	= "LIMIT $position, $totalItemsPerPage";
 		}
 		$query = implode(' ', $query);
-		$result = $this->listRecord($query);
 
+		$result = $this->listRecord($query);
 		return $result;
 	}
 	public function changeStatus($arrParam)
 	{
+
 		$id = $arrParam['id'];
 		$status = ($arrParam['status'] == 'active') ?  'inactive' : 'active';
-		//$query = "UPDATE `$this->table` SET `status` = '$status' WHERE  `id` = '$id'";
-		$this->update(['status'=> $status], [['id', $id]]);
+		$query = "UPDATE `$this->_tableUser` SET `status` = '$status' WHERE  `id` = '$id'";
+		$this->query($query);
 		if ($this->affectedRows()) {
 			Session::set('message', NOTICE_UPDATE_STATUS_SUCCESS);
 		}
@@ -67,9 +76,9 @@ class GroupModel extends Model
 	{
 		$id = $arrParam['id'];
 		$group = $arrParam['group'];
-		$group == "yes" ? $group = "no" : $group = "yes";
 
-		$this->update(['group_acp' => $group], [['id', $id]]);
+
+		$this->update(['group_id' => $group], [['id', $id]]);
 		if ($this->affectedRows()) {
 			Session::set('message', NOTICE_UPDATE_GROUP_SUCCESS);
 		}
@@ -117,9 +126,10 @@ class GroupModel extends Model
 
 	public function statusAction($arrParam, $options = null)
 	{
+
 		$ids = implode(',', $arrParam['ckid']);
 		$status = $arrParam['action'];
-		$query = "UPDATE `$this->table` SET `status` = '$status' WHERE  `id` IN ({$ids})";
+		$query = "UPDATE `$this->_tableUser` SET `status` = '$status' WHERE  `id` IN ({$ids})";
 		$this->query($query);
 		if ($this->affectedRows()) {
 			Session::set('message', NOTICE_UPDATE_STATUS_SUCCESS);

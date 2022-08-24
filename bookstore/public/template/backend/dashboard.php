@@ -32,9 +32,10 @@
                     <!-- script -->
                 </div>
                 <!-- /.content-wrapper -->
-                <?php require_once 'html/footer.php'; ?>
+
             </section>
         </div>
+        <?php require_once 'html/footer.php'; ?>
         <!-- <?php require_once 'html/script.php'; ?> -->
         <?php echo $this->_jsFiles; ?>
 </body>

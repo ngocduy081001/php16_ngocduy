@@ -15,21 +15,22 @@ class Controller
 	protected $_arrParam;
 
 	// Params pagination
-	protected $_pagination = array('totalItemsPerPage' 	=>3,
-									'pageRange'			=>3);
+	protected $_pagination = [
+		'totalItemsPerPage' => 3,
+		'pageRange' => 3,
+	];
 
 	public function __construct($arrParams)
 	{
 		$this->setModel($arrParams['module'], $arrParams['controller']);
 		$this->setTemplate($this);
 		$this->setView($arrParams['module']);
-		
 
-		$this->_pagination['currentPage']	= (isset($arrParams['page']))? $arrParams['page'] :1;
+
+		$this->_pagination['currentPage']	= (isset($arrParams['page'])) ? $arrParams['page'] : 1;
 		$arrParams['pagination'] 			= $this->_pagination;
 		$this->setParams($arrParams);
-		$this->_view->arrParam 				= $arrParams;
-		
+		$this->_view->arrParam				= $arrParams;
 	}
 
 	// SET MODEL
@@ -88,5 +89,12 @@ class Controller
 	{
 		header("location: index.php?module=$moduleName&controller=$controller&action=$action");
 		exit();
+	}
+	public function setPagination($config)
+	{
+		$this->_pagination['totalItemsPerPage'] = $config['totalItemsPerPage'];
+		$this->_pagination['pageRange'] = $config['pageRange'];
+		$this->_arrParam['pagination'] = $this->_pagination;
+		$this->_view->arrParams = $this->_arrParam;
 	}
 }
