@@ -40,7 +40,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="group-form.php" class="nav-link" data-active="form">
+                            <a href="ndex.php?module=backend&controller=group&action=form" class="nav-link" data-active="form">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>Form</p>
                             </a>
@@ -54,14 +54,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="user-list.php" class="nav-link" data-active="index">
+                            <a href="index.php?module=backend&controller=user&action=index" class="nav-link" data-active="index">
                                 <i class="nav-icon fas fa-list-ul"></i>
                                 <p>List</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="user-form.php" class="nav-link" data-active="form">
+                            <a href="index.php?module=backend&controller=user&action=form" class="nav-link" data-active="form">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>Form</p>
                             </a>

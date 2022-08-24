@@ -45,4 +45,17 @@ $(document).ready(function () {
       },
     });
   });
+  // $("a[name='status']").change(function (e) {
+ 
+  //   var status = $(this).val();
+  //   var id = $(this).data("id");
+  //   $.ajax({
+  //     type: "POST",
+  //     url: "index.php?module=backend&controller=user&action=changeStatus",
+  //     data: { status: status, id: id, message: "message" },
+  //     success: function (data) {
+  //       //sessionStorage.setItem("message", "message");
+  //     },
+  //   });
+  // });
 });

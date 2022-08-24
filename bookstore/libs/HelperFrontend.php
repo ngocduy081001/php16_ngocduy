@@ -83,7 +83,7 @@ class HelperFrontend
             $class = 'btn-danger rounded-circle';
             $icon = 'fa fa-minus';
         }
-        $xhtml .= '<a href="index.php?module=backend&controller=' . $controller . '&action=changeStatus&id=' . $item . '&status=' . $status . '" class="btn btn-sm ' . $class . ' "><i class="' . $icon . '"></i></a>';
+        $xhtml .= '<a  name="status" data-id="' . $item . '" href="index.php?module=backend&controller=' . $controller . '&action=changeStatus&id=' . $item . '&status=' . $status . '" class="btn btn-sm ' . $class . ' "><i class="' . $icon . '"></i></a>';
         return $xhtml;
     }
 
